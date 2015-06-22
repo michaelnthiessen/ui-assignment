@@ -3,8 +3,10 @@ $(function() {
 
     var resize = function() {
         var NAV_BAR = 56;
+        var FILTER = 50;
         var height = $(window).height() - NAV_BAR;
-        $('.sidebar').height(height);
+        $('.sidebar-scroll').height(height - FILTER);
+        $('.detail').height(height);
     };
 
     resize();
@@ -18,13 +20,24 @@ $(function() {
 
 var app = angular.module('app', []);
 
-app.controller('sidebar-controller', function($scope, $location) {
-    $scope.message = 'Sidebar';
-    $scope.data = ALL_DATA;
+app.controller('sidebar-controller', function($scope, $location, $rootScope) {
+
+    $scope.select = function(item) {
+        $rootScope.selected = item;
+        console.log(item);
+    };
+
+    var init = function() {
+        $scope.data = ALL_DATA;
+        $rootScope.selected = $scope.data[0];
+    }
+
+    init();
+
 });
 
-app.controller('detail-controller', function($scope, $location) {
-    $scope.message = 'Detail';
+app.controller('detail-controller', function($scope, $location, $rootScope) {
+
 });
 
 /*

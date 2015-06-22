@@ -1,16 +1,80 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Front-End/Web Development UI Assignment for Interviewees</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>UI Assignment</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/custom.css">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
   </head>
   <body>
-    <p>Hello world!</p>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <p class="navbar-text title">Commmit History</p>
+      </div>
+    </nav>
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script src="data/allData.js"></script>
-    <script src="js/main.js"></script>
+    <div class="container">
+      <div class="col-md-5 sidebar" ng-controller="sidebar-controller">
+
+        <div class="row sidebar-control">
+          <h4>Filter and stuff:</h4>
+        </div>
+
+        <div class="row sidebar-scroll">
+          <div class="row sidebar-commit" ng-class="{selected: item === selected}" ng-click="select(item)" ng-repeat="item in data | limitTo:25">
+            <strong><span class="">{{ item.commit.message | truncate:50 }}</span></strong>
+            <span class="pull-right">{{ item.commit.author.date }}</span>
+            <br>
+            <em><span>{{ item.commit.author.name }}</span></em>
+          </div>
+        </div>  
+
+      </div>
+
+      <div class="col-md-7 detail" ng-controller="detail-controller">
+        <h3>{{ selected.commit.message }}</h3>
+        <span>{{ selected.commit.author.date }}</span>
+        <span class="pull-right">
+          <span class="additions">+{{ selected.stats.additions }}</span>
+          /
+          <span class="deletions">-{{ selected.stats.deletions }}</span>
+        </span>
+        <br>
+        <span><em>{{ selected.commit.author.name }}</em></span>
+
+        <br><br><br>
+        <span ng-repeat="file in selected.files">
+          <span><strong>{{ file.filename }}</strong></span>
+          <span class="pull-right">
+            <span class="additions">+{{ file.additions }}</span>
+            /
+            <span class="deletions">-{{ file.deletions }}</span>
+          </span>
+          <pre ng-if="file.patch !== undefined"><code>{{ file.patch }}</code></pre>
+          <pre ng-if="file.patch === undefined"><code>No patch data.</code></pre>
+          </pre>
+        </span>
+
+      </div>
+    </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script type="text/javascript" src="js/angular.js"></script>
+    <script type="text/javascript" src="js/angular-route.js"></script>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="data/allData.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
   </body>
 </html>

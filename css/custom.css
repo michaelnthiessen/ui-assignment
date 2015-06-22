@@ -1,22 +1,71 @@
 body {
     padding-top: 56px;
     height: 100%;
+    overflow: hidden;
 }
 
-.sidebar {
-    height: 100%;
+.sidebar-scroll,
+.detail {
     overflow: auto;
 }
 
+.sidebar-scroll {
+    height: 100%;
+    padding: 0 12px;
+}
+
+.sidebar {
+    border-right: 1px solid #CCC;
+}
+
 .sidebar-commit {
-    min-height: 70px;
     font: bold;
-    border-bottom: 1px #DDD solid;
-    padding: 3px;
+    border-bottom: 1px #CCC solid;
+    padding: 3px 10px;
+    margin-bottom: 0;
+}
+
+.sidebar-commit:hover {
+    cursor: pointer;
+}
+
+.sidebar-control {
+    padding: 5px 10px;
+    height: 50px;
+    background-color: whitesmoke;
+    border-bottom: 1px solid #CCC;
+}
+
+.additions,
+.deletions {
+    font-weight: bold;
+}
+
+.additions {
+    color: green;
+}
+
+.deletions {
+    color: red;
+}
+
+.detail {
+    padding: 0 20px;
+}
+
+.sidebar-commit.selected {
+    color: whitesmoke;
+    background-color: deepskyblue;
+}
+
+.container {
+    padding: 0;
+    margin: 0;
+    width: 100%;
 }
 
 .title {
-    color: ghostwhite !important;
+    color: whitesmoke !important;
     width: 100%;
     text-align: center;
     font-size: 25px;
