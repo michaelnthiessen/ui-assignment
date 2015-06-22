@@ -1,0 +1,25 @@
+body {
+    padding-top: 56px;
+    height: 100%;
+}
+
+.sidebar {
+    height: 100%;
+    overflow: auto;
+}
+
+.sidebar-commit {
+    min-height: 70px;
+    font: bold;
+    border-bottom: 1px #DDD solid;
+    padding: 3px;
+}
+
+.title {
+    color: ghostwhite !important;
+    width: 100%;
+    text-align: center;
+    font-size: 25px;
+    font-weight: bold;
+    margin: 10px;
+}
