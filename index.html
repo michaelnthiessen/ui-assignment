@@ -28,16 +28,16 @@
     <div class="container">
       <div class="col-md-5 sidebar" ng-controller="sidebar-controller">
 
-        <div class="row sidebar-control">
-          <h4>Filter and stuff:</h4>
-        </div>
-
         <div class="row sidebar-scroll">
-          <div class="row sidebar-commit" ng-class="{selected: item === selected}" ng-click="select(item)" ng-repeat="item in data | limitTo:25">
+          <div class="row sidebar-commit" ng-class="{selected: item === selected}" ng-click="select(item)" ng-repeat="item in data | limitTo:itemLimit">
             <strong><span class="">{{ item.commit.message | truncate:50 }}</span></strong>
             <span class="pull-right">{{ item.commit.author.date }}</span>
             <br>
             <em><span>{{ item.commit.author.name }}</span></em>
+          </div>
+
+          <div class="row load" ng-click="increaseItemLimit()">
+            <strong>Load more</strong>
           </div>
         </div>  
 
@@ -54,7 +54,18 @@
         <br>
         <span><em>{{ selected.commit.author.name }}</em></span>
 
-        <br><br><br>
+        <br>
+        <br>
+
+        <div class="message" ng-click="edit()">
+          <span><strong>Edit commit message</strong></span>
+          <form class="form">
+            <textarea rows="5" class="form-control" ng-model="selected.commit.edited_message"></textarea>
+            <button id="save" type="submit" class="btn btn-success" ng-click="save()">Save Changes</button>
+          </form>
+        </div>
+
+        <br><br>
         <span ng-repeat="file in selected.files">
           <span><strong>{{ file.filename }}</strong></span>
           <span class="pull-right">
